@@ -1,0 +1,9 @@
+version: '3'
+
+
+tasks:
+  start:
+    # Run the command like task start -- 1 for the first question
+    dir: '{{.USER_WORKING_DIR}}/cmd'
+    cmds:
+      - go run ./{{.CLI_ARGS}}.go
