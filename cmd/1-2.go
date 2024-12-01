@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"slices"
 
 	"gandalf-pro.dev/advent-of-code-2024/pkg/api"
 )
@@ -27,19 +26,17 @@ func main() {
 		leftList = append(leftList, left)
 		rightList = append(rightList, right)
 	}
-	slices.SortFunc(leftList, func(a, b int) int {
-		return a - b
-	})
-	slices.SortFunc(rightList, func(a, b int) int {
-		return a - b
-	})
+
+	rightSideOccurrenceMap := make(map[int]int)
+	for i := 0; i < len(rightList); i++ {
+		rightSideOccurrenceMap[rightList[i]] = rightSideOccurrenceMap[rightList[i]] + 1
+	}
+
 	var sum = 0
 	for i := 0; i < len(leftList); i++ {
-		var res = leftList[i] - rightList[i]
-		if res < 0 {
-			res *= -1
-		}
-		sum += res
+		var occurred = rightSideOccurrenceMap[leftList[i]]
+		sum += leftList[i] * occurred
 	}
+
 	fmt.Println(sum)
 }
