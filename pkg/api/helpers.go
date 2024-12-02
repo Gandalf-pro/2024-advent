@@ -21,3 +21,15 @@ func ReadLines(path string) ([]string, error) {
 	}
 	return lines, scanner.Err()
 }
+
+func GetDigitCount(i int) int {
+	if i >= 1e18 {
+		return 19
+	}
+	x, count := 10, 1
+	for x <= i {
+		x *= 10
+		count++
+	}
+	return count
+}
